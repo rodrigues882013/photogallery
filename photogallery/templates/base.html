@@ -32,6 +32,12 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item home"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
           <li class="nav-item photo"><a class="nav-link" href="{% url 'photos' %}">Upload Photos</a></li>
+          {% if not request.user.is_authenticated %}
+          <li class="nav-item photo"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+          {% if request.user.is_authenticated %}
+          <li class="nav-item photo"><a class="nav-link" href="{% url 'logout' %}">logout</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>

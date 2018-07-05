@@ -39,8 +39,18 @@ class GalleryService(object):
     @staticmethod
     def like(**kwargs):
         if not kwargs.get("photo_id"):
-            return HttpResponse(json.dumps(dict(msg="Erro, por favor tente denovo")))
+            return HttpResponse(json.dumps(dict(msg="Something wrong, try again.")))
 
         image = Image.objects.get(id=kwargs.get("photo_id"))
         Image.objects.filter(id=kwargs.get("photo_id")).update(likes=image.likes + 1)
-        return HttpResponse(json.dumps(dict(liked=image.likes + 1)))
+        return HttpResponse(json.dumps(dict(message="Liked with success", liked=image.likes + 1)))
+
+    @staticmethod
+    def approve(**kwargs):
+        if not kwargs.get("photo_id"):
+            return HttpResponse(json.dumps(dict(message="Something wrong, try again.")))
+
+        Image.objects.filter(id=kwargs.get("photo_id")).update(approved=True)
+        return HttpResponse(json.dumps(dict(message="Photo approved with success.")))
+
+

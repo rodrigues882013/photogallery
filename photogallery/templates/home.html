@@ -20,6 +20,9 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
+                      {% if request.user.is_authenticated %}
+                      <button data-id="{{photo.id}}" type="button" class="btn btn-sm btn-outline-secondary approve">Approve</button>
+                      {% endif %}
                       <button data-id="{{photo.id}}" type="button" class="btn btn-sm btn-outline-secondary like">Like</button>
                     </div>
                     <small class="numlike text-muted"><span class="likes-{{photo.id}}">{{photo.likes}}</span> likes</small>

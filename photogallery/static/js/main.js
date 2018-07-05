@@ -4,7 +4,7 @@ $(function(){
 
         $.ajax({
 		    url: 'like',
-		    data: {like: 1, photo_id: photo_id},
+		    data: {photo_id: photo_id},
 		    type: 'post',
 		    dataType: 'json',
 		    success: function(data) {
