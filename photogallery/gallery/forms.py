@@ -3,7 +3,7 @@ from gallery.models import Image
 
 
 class ImageForm(ModelForm):
-    image = ImageField(widget=ClearableFileInput(attrs={'multiple': True}))
+    image = FileField(widget=ClearableFileInput(attrs={'multiple': True}))
     file_name = CharField(widget=TextInput(attrs={'class': 'form-control', 'placeholder': 'Photo Title'}))
 
     class Meta:
