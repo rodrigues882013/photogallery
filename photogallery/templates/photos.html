@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{%block content%}
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="input-group">
+                <form method='POST' action='' enctype="multipart/form-data" class='form-photo'>
+                    {% csrf_token %}
+
+                    <label for="id_photo_title">Photo title:</label>
+                    <div class="input mb-3">
+                    {{ form.file_name }}
+                    </div>
+
+                    <div class="input mb-3">
+                    {{ form.image }}
+                    </div>
+                    <div class="input mb-3">
+                    <input type='submit' value='Enviar' class='btn btn-primary send'>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{%endblock%}
