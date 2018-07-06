@@ -5,7 +5,11 @@
 
 	<div class="album py-5">
         <div class="container">
-
+          <h5>
+            SortBy:
+              <a class="btn btn-default" href="{% url 'home' %}?sorted_by=likes"> Likes </a>
+              <a class="btn btn-default" href="{% url 'home' %}?sorted_by=upload_date"> Upload Date </a>
+          </h5>
           <div class="row">
             {% for photo in photos %}
             <div class="col-md-3">

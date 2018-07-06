@@ -15,39 +15,23 @@ logger = logging.getLogger(__name__)
 
 
 def home(request):
-    if request.user.is_authenticated:
-        images = Image.objects.all()
-    else:
-        images = filter(lambda x: x.approved, Image.objects.all())
 
-    return render(request, 'home.html', dict(photos=images, is_authenticated=request.user.is_authenticated))
+    if request.method == 'GET':
+        sorted_method = request.GET['sorted_by']
+        images = service.filter_data_set(sorted_method, request.user.is_authenticated)
+        return render(request, 'home.html', dict(photos=images, is_authenticated=request.user.is_authenticated))
 
 
 def photos(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
-        print(request.FILES['image'])
+
         if form.is_valid():
             service.upload_file(request.FILES['image'], request.POST['file_name'])
-
     else:
         form = ImageForm()
 
     return render(request, 'photos.html', dict(form=form))
-
-
-def do_login(request):
-    username = request.POST['username']
-    password = request.POST['password']
-    user = authenticate(request, username=username, password=password)
-
-    if user is not None:
-        login(request, user)
-        # Redirect to a success page.
-        redirect(to='home')
-    else:
-        # Return an 'invalid login' error message.
-        redirect(to='error')
 
 
 @csrf_exempt

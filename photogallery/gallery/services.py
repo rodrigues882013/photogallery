@@ -53,4 +53,19 @@ class GalleryService(object):
         Image.objects.filter(id=kwargs.get("photo_id")).update(approved=True)
         return HttpResponse(json.dumps(dict(message="Photo approved with success.")))
 
+    @staticmethod
+    def filter_data_set(sorted_method, is_authenticated):
+        logger.debug(sorted_method)
+        if is_authenticated:
+            if sorted_method not in ['upload_date', 'likes']:
+                photos = filter(lambda x: x.approved, Image.objects.all())
+            else:
+                photos = Image.objects.order_by('-' + sorted_method)
+        else:
+            if sorted_method not in ['upload_date', 'likes']:
+                logger.debug("AQUI")
+                photos = filter(lambda x: x.approved, Image.objects.all())
+            else:
+                photos = filter(lambda x: x.approved, Image.objects.order_by('-' + sorted_method))
 
+        return photos
