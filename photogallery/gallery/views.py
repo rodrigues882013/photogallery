@@ -1,15 +1,12 @@
 import json
 import logging
 
-from django.contrib.auth import authenticate, login
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from gallery.models import Image
 from gallery.forms import ImageForm
 from gallery.services import GalleryService as service
-from django.shortcuts import render, redirect
-from django.template import RequestContext
+from django.shortcuts import render
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +14,11 @@ logger = logging.getLogger(__name__)
 def home(request):
 
     if request.method == 'GET':
-        sorted_method = request.GET['sorted_by']
+        sorted_method = ''
+
+        if 'sorted_by' in request.GET:
+            sorted_method = request.GET['sorted_by']
+
         images = service.filter_data_set(sorted_method, request.user.is_authenticated)
         return render(request, 'home.html', dict(photos=images, is_authenticated=request.user.is_authenticated))
 
