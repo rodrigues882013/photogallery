@@ -54,8 +54,7 @@ def do_login(request):
 def like(request):
     if request.is_ajax() and request.method == 'POST':
         try:
-            return service.like(likes=request.POST['like'],
-                                photo_id=request.POST['photo_id'])
+            return service.like(photo_id=request.POST['photo_id'])
 
         except ObjectDoesNotExist:
             return HttpResponse(json.dumps(dict(msg="Erro, por favor tente denovo", id_=0)))

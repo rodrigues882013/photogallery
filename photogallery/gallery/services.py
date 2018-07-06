@@ -22,7 +22,7 @@ class GalleryService(object):
         ext = cls.get_extension(file.name)
         client = boto3.client('s3')
         target_bucket = 'images-gallery-app'
-        image_path = 'images/' + file_name + '.' + ext
+        image_path = '/images/' + file_name + '.' + ext
 
         try:
             client.put_object(Bucket=target_bucket, Key=image_path, Body=file.read())
