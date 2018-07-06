@@ -5,6 +5,8 @@
 
 	<div class="album py-5">
         <div class="container">
+
+          {% if photos.count > 0 %}
           <h5>
             SortBy:
               <a class="btn btn-default" href="{% url 'home' %}?sorted_by=likes"> Likes </a>
@@ -36,6 +38,9 @@
             </div>
             {% endfor %}
           </div>
+          {% else %}
+            <h5> Gallery is empty, upload photos </h5>
+          {% endif %}
         </div>
       </div>
 	

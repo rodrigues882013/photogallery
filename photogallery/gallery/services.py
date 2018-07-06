@@ -55,17 +55,17 @@ class GalleryService(object):
 
     @staticmethod
     def filter_data_set(sorted_method, is_authenticated):
-        logger.debug(sorted_method)
+        logger.debug("Filtering data")
+
         if is_authenticated:
             if sorted_method not in ['upload_date', 'likes']:
-                photos = filter(lambda x: x.approved, Image.objects.all())
+                photos = Image.objects.all()
             else:
                 photos = Image.objects.order_by('-' + sorted_method)
         else:
             if sorted_method not in ['upload_date', 'likes']:
-                logger.debug("AQUI")
-                photos = filter(lambda x: x.approved, Image.objects.all())
+                photos = Image.objects.filter(approved=True)
             else:
-                photos = filter(lambda x: x.approved, Image.objects.order_by('-' + sorted_method))
+                photos = Image.objects.order_by('-' + sorted_method).filter(approved=True)
 
         return photos

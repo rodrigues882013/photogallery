@@ -39,7 +39,7 @@ else:
         format='%(asctime)s - [%(levelname)s] - %(message)s',
     )
 
-ALLOWED_HOSTS = ['46.101.81.106']
+ALLOWED_HOSTS = ['localhost', '46.101.81.106']
 
 
 # Application definition
