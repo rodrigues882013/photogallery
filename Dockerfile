@@ -1,14 +1,16 @@
-FROM python:3-alpine
+FROM python:3.6
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /webapps
+WORKDIR /webapps
 
-RUN mkdir -p /usr/src/application
-WORKDIR /usr/src/application
+# Installing OS Dependencies
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
+libsqlite3-dev
+RUN pip install -U pip setuptools
+COPY requirements.txt /webapps/
+COPY requirements-opt.txt /webapps/
+RUN pip install -r /webapps/requirements.txt
+ADD . /webapps/
 
-COPY . /usr/src/application
-RUN pip install -r requirements.txt
-
-ENTRYPOINT [ "python" ]
-
-CMD ["manage.py", "runserver" ]
-
-# Expose the Django port
+# Django service
 EXPOSE 8000

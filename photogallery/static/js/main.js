@@ -9,8 +9,14 @@ $(function(){
                 type: 'post',
                 dataType: 'json',
                 success: function(data) {
-                    if (event.data.url === 'like')
+                    if (event.data.url === 'like'){
                         $('.likes-' + photo_id).text(data.liked)
+                    }
+
+                    if (event.data.url === 'approve'){
+                        alert("Photo release with success.");
+                        window.location.href = "/home"
+                    }
                 },
                 error: function (xhr, err, errorThrown) {
                   console.error('Error: %s', errorThrown)
@@ -23,8 +29,6 @@ $(function(){
 
 
     $('.like').on('click', {'url': 'like'}, callback);
-
-
     $('.approve').on('click', {'url': 'approve'}, callback)
 
 })
