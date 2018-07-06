@@ -25,6 +25,7 @@ admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
     path('home', views.home, name='home'),
     path('photos', views.photos, name='photos'),
     path('like', views.like, name='like'),
