@@ -3,6 +3,7 @@ import logging
 import boto3
 from django.http import HttpResponse
 from gallery.models import Image
+from django.conf import settings
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +22,7 @@ class GalleryService(object):
         logger.info("Uploading image")
         ext = cls.get_extension(file.name)
         client = boto3.client('s3')
-        target_bucket = 'images-gallery-app'
+        target_bucket = settings.S3_BUCKET
         image_path = 'images/' + file_name + '.' + ext
 
         try:

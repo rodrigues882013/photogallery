@@ -156,3 +156,4 @@ STATICFILES_DIRS = (
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 
+S3_BUCKET = 'images-gallery-app'
