@@ -20,7 +20,7 @@ class GalleryService(object):
     @classmethod
     def upload_file(cls, file, file_name):
         if Image.objects.all().count() > 500:
-	    logger.error('Operation is not allowed.')
+            logger.error('Operation is not allowed.')
             raise Exception('Operation is not allowed')
 
         logger.info("Uploading image")
