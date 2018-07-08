@@ -141,7 +141,8 @@ TEMPLATE_DIRS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'http://46.101.81.106:8123/static/'
+STATIC_ROOT =  '/var/www/photogallery.com/static/'
 
 
 # Serving static files
